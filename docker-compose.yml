@@ -1,0 +1,25 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: sprintdesk-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sprintdesk
+    ports:
+      - "3306:3306"
+    volumes:
+      - sprintdesk_mysql_data:/var/lib/mysql
+
+  mongodb:
+    image: mongo:8
+    container_name: sprintdesk-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - sprintdesk_mongo_data:/data/db
+
+volumes:
+  sprintdesk_mysql_data:
+  sprintdesk_mongo_data:
