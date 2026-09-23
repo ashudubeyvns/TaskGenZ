@@ -1,490 +1,875 @@
-# TaskForge — Java Full Stack Project Management Platform
+<div align="center">
 
-TaskForge is the polished production-ready evolution of the original SprintDesk project.
+# ⚡ TaskGenZ
 
-**Brand:** TaskForge  
-**Repository can remain named `SprintDesk` if you already have that GitHub repository.**  
-The UI is branded TaskForge without breaking the existing route/API structure.
+### Modern Java Full Stack Project & Delivery Management Platform
 
-## What is included
+<p>
 
-- React 19 + TypeScript + Vite + Tailwind CSS
-- Spring Boot 3.5 + Java 21
-- JWT authentication + refresh tokens
-- MySQL for users, sprints and tasks
-- MongoDB for comments and notifications
-- Kanban drag/drop with persisted status + order
-- Task create/update/delete
-- Editable title, description, status, priority, assignee and due date
-- Optimistic UI with rollback on API failure
-- Real task notifications for create, move, reorder, assignment, priority, due-date, update, delete and comments
-- Notification read/unread/delete
-- Analytics dashboard
-- Search and filters
-- Light/dark theme
-- Responsive UI
-- Vercel Services configuration for the React frontend + Spring Boot container
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React"/>
 
-## Data architecture
+  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
 
-```text
-Browser
-  │
-  ├── React / Vite
-  │      │
-  │      └── /api/*
-  │
-  ▼
-Spring Boot REST API
-  ├── MySQL
-  │    ├── users
-  │    ├── sprints
-  │    └── tasks
-  │
-  └── MongoDB
-       ├── comments
-       └── notifications
-```
+  <img src="https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite"/>
 
-The Vercel application container is stateless. Database state stays in the external MySQL/MongoDB services.
+  <img src="https://img.shields.io/badge/Spring%20Boot-3.5-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot"/>
 
----
+  <img src="https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java"/>
 
-# 1. Local testing
+  <img src="https://img.shields.io/badge/MySQL-9.6-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL"/>
 
-## Requirements
+  <img src="https://img.shields.io/badge/MongoDB-8-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB"/>
 
-- Java 21
-- Maven 3.9+
-- Node.js 22+
-- npm
-- MySQL 8+/9+
-- MongoDB 8+
-- Git
+</p>
 
-You can use your existing local MySQL and MongoDB. You do **not** need to reinstall them.
+<p>
 
-## Terminal 1 — MongoDB
+  <img src="https://img.shields.io/badge/JWT-Authentication-000000?style=flat-square&logo=jsonwebtokens&logoColor=white"/>
 
-If MongoDB is already running, skip this.
+  <img src="https://img.shields.io/badge/REST-API-FF6F00?style=flat-square"/>
 
-```bash
-brew services start mongodb-community
-```
+  <img src="https://img.shields.io/badge/TailwindCSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white"/>
 
-Verify:
+  <img src="https://img.shields.io/badge/Zustand-State-443E38?style=flat-square"/>
 
-```bash
-mongosh --eval 'db.runCommand({ ping: 1 })'
-```
+  <img src="https://img.shields.io/badge/React%20Query-Data%20Fetching-FF4154?style=flat-square"/>
 
-## Terminal 2 — MySQL
+</p>
 
-If MySQL is already running, skip this.
+<br/>
 
-```bash
-brew services start mysql
-```
+<a href="https://github.com/ashudubeyvns/TaskGenZ">
 
-Verify:
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=24&pause=1000&color=A855F7&center=true&vCenter=true&width=800&lines=Plan+%E2%86%92+Build+%E2%86%92+Track+%E2%86%92+Deliver;Modern+Java+Full+Stack+Workspace;React+%2B+Spring+Boot+%2B+MySQL+%2B+MongoDB;Built+for+real+world+project+management" alt="Typing animation"/>
 
-```bash
-mysql -u YOUR_MYSQL_USER -p -e "CREATE DATABASE IF NOT EXISTS sprintdesk;"
-```
+</a>
 
-Use your real MySQL username/password. Do not put the password into Git.
+<br/>
 
-## Terminal 3 — backend
+**TaskGenZ** is a production-oriented full-stack project management workspace built with
 
-From the project root:
+**React, TypeScript, Spring Boot, Java, MySQL and MongoDB.**
 
-```bash
-cd backend
+It combines a modern Kanban workflow, authentication, task management,
+notifications, comments, analytics and persistent backend data into one application.
 
-export MYSQL_URL='jdbc:mysql://127.0.0.1:3306/sprintdesk?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC'
-export MYSQL_USERNAME='YOUR_MYSQL_USER'
-export MYSQL_PASSWORD='YOUR_MYSQL_PASSWORD'
-export MONGODB_URI='mongodb://127.0.0.1:27017/sprintdesk'
-export JWT_SECRET='local-taskforge-secret-change-this'
-export CORS_ALLOWED_ORIGINS='http://localhost:5173'
-export PORT=8080
+<br/>
 
-mvn clean spring-boot:run
-```
+<a href="https://github.com/ashudubeyvns/TaskGenZ">
 
-Verify in another terminal:
+  <img src="https://img.shields.io/github/stars/ashudubeyvns/TaskGenZ?style=for-the-badge&logo=github&label=Stars" />
 
-```bash
-curl -i http://localhost:8080/api/health
-```
+</a>
 
-Expected:
+<a href="https://github.com/ashudubeyvns/TaskGenZ">
 
-```text
-HTTP/1.1 200
-{"service":"sprintdesk-api","status":"UP"}
-```
+  <img src="https://img.shields.io/github/forks/ashudubeyvns/TaskGenZ?style=for-the-badge&logo=github&label=Forks" />
 
-## Terminal 4 — frontend
+</a>
 
-From the project root:
+<a href="https://github.com/ashudubeyvns/TaskGenZ">
 
-```bash
-npm install
-npm run dev
-```
+  <img src="https://img.shields.io/github/last-commit/ashudubeyvns/TaskGenZ?style=for-the-badge&label=Last%20Commit" />
 
-Open:
+</a>
 
-```text
-http://localhost:5173
-```
-
-The Vite proxy sends `/api/*` to `http://localhost:8080`.
+</div>
 
 ---
 
-# 2. Login
+## ✨ Why TaskGenZ?
 
-The development seed creates:
+TaskGenZ is designed as a **real Java Full Stack application**, not just a frontend demo.
 
-```text
-admin / admin123
-ashutosh / ashutosh123
-```
+The platform provides:
 
-If your database already contains the users, use the credentials that are currently present in your database.
+- 🔐 JWT authentication with refresh tokens
+- 📋 Kanban task management
+- 🖱️ Drag-and-drop task workflow
+- 🔄 Persistent task ordering
+- 👥 User assignment
+- 🎯 Priority management
+- 📅 Due-date management
+- 💬 Task comments
+- 🔔 Real-time-style application notifications
+- 📊 Analytics dashboard
+- 🔎 Search and filtering
+- 🌗 Light / Dark theme
+- ⚡ Optimistic UI with rollback
+- 📱 Responsive interface
+- 🗄️ MySQL + MongoDB persistence
+- ☁️ Production deployment architecture
 
 ---
 
-# 3. Full feature test checklist
+# 🎬 Product Flow
 
-Test in this exact order.
+```mermaid
+flowchart LR
 
-### A. Authentication
+    A[🔐 Login] --> B[📊 Dashboard]
 
-1. Open `/login`.
-2. Login.
-3. Confirm `/dashboard` opens.
-4. Logout.
-5. Login again.
+    B --> C[📋 Kanban Board]
 
-### B. Board loading
+    C --> D[➕ Create Task]
+    C --> E[🖱️ Drag & Drop]
+    C --> F[✏️ Edit Task]
 
-1. Open **Board**.
-2. Confirm all tasks load from MySQL.
-3. Refresh the browser.
-4. Confirm the same tasks are still present.
+    F --> G[💾 Persist Changes]
+    D --> G
+    E --> G
 
-### C. Drag/drop persistence
+    G --> H[(🗄️ MySQL)]
 
-1. Drag a task from Backlog → In Progress.
-2. Wait for the task to settle.
-3. Open Dashboard and return to Board.
-4. Refresh the browser.
-5. Confirm the task remains In Progress.
-6. Move it to Review.
-7. Move it to Done.
-8. Move it back to Review.
+    F --> I[(🍃 MongoDB)]
 
-The status is persisted by the Spring Boot API.
+    I --> J[🔔 Notifications]
+    I --> K[💬 Comments]
 
-### D. Reordering
+    B --> L[📈 Analytics]
 
-1. Put at least two tasks in the same column.
-2. Drag one above/below another.
-3. Refresh.
-4. Confirm the order remains.
+🏗️ System Architecture
+                         🌍 INTERNET
+                              │
+                              ▼
+                  ┌─────────────────────┐
+                  │      VERCEL         │
+                  │                     │
+                  │ React + Vite        │
+                  │ TypeScript          │
+                  │ Tailwind CSS        │
+                  └──────────┬──────────┘
+                             │
+                         HTTPS / API
+                             │
+                             ▼
+                  ┌─────────────────────┐
+                  │    SPRING BOOT      │
+                  │       REST API      │
+                  │                     │
+                  │ JWT Security        │
+                  │ Controllers         │
+                  │ Services            │
+                  │ Repositories        │
+                  └─────────┬───────────┘
+                            │
+                 ┌──────────┴──────────┐
+                 │                     │
+                 ▼                     ▼
+        ┌─────────────────┐   ┌─────────────────┐
+        │      MySQL      │   │     MongoDB     │
+        │                 │   │                 │
+        │ Users           │   │ Comments        │
+        │ Sprints         │   │ Notifications   │
+        │ Tasks           │   │                 │
+        └─────────────────┘   └─────────────────┘
+Architecture Responsibilities
+Layer	Responsibility
+React	User interface and client interactions
+TypeScript	Type safety
+Vite	Development and production build
+Spring Boot	REST API and business logic
+Spring Security	Authentication and authorization
+JWT	Access and refresh token authentication
+MySQL	Users, sprints and tasks
+MongoDB	Comments and notifications
+Vercel	Production application hosting
+🧰 Tech Stack
+Frontend
+Technology	Purpose
+React 19	UI
+TypeScript	Type safety
+Vite	Build tooling
+Tailwind CSS	Styling
+React Router	Routing
+TanStack Query	Server-state management
+Zustand	Client-state management
+dnd-kit	Drag & drop
+Recharts	Analytics
+Vitest	Testing
+Backend
+Technology	Purpose
+Java 21	Backend language
+Spring Boot 3.5	Application framework
+Spring Web	REST APIs
+Spring Security	Authentication
+JWT	Access / refresh tokens
+Spring Data JPA	MySQL persistence
+Hibernate	ORM
+Spring Data MongoDB	MongoDB persistence
+Maven	Build system
+Databases
+MySQL
 
-### E. Edit
+Stores structured application data:
 
-Open a task and choose Edit.
+users
+sprints
+tasks
+MongoDB
 
-Change:
+Stores document-oriented data:
 
-- title
-- description
-- status
-- priority
-- assignee
-- due date
+comments
+notifications
+🚀 Core Features
+🔐 Authentication
 
-Click Save.
+TaskGenZ uses JWT-based authentication.
 
-Then:
+Login
+  ↓
+Access Token
+  ↓
+Authenticated Requests
+  ↓
+Access Token Expired
+  ↓
+Refresh Token
+  ↓
+New Access Token
 
-1. close the drawer
-2. refresh
-3. reopen the task
+Supported operations:
 
-All changes should remain.
+Login
+Logout
+Current user
+Token refresh
+Protected routes
+JWT authentication filter
+📋 Kanban Board
 
-### F. New task
+TaskGenZ provides a persistent Kanban workflow.
 
-Create a new task with:
+┌──────────┐   ┌─────────────┐   ┌────────┐   ┌──────┐
+│ Backlog  │ → │ In Progress │ → │ Review │ → │ Done │
+└──────────┘   └─────────────┘   └────────┘   └──────┘
 
-- title
-- description
-- priority
-- assignee
-- due date
+Tasks can be:
 
-Confirm:
+Created
+Edited
+Moved
+Reordered
+Assigned
+Deleted
 
-- it appears in Backlog
-- it survives refresh
-- it exists in MySQL
+Task status and ordering are persisted through the Spring Boot API.
 
-### G. Delete
+🖱️ Drag & Drop
 
-Delete a test task.
+Task movement uses optimistic UI.
 
-Refresh.
+User drags task
+      ↓
+UI updates immediately ⚡
+      ↓
+Spring Boot API
+      ↓
+Database
+      ↓
+Success ───────────────→ Keep UI
+      │
+      └── Failure ─────→ Rollback
 
-The task should remain deleted.
+This provides a responsive interface while maintaining backend consistency.
 
-### H. Notifications
+🔔 Notification System
 
-Open the notification bell after each operation.
+TaskGenZ includes persistent application notifications.
 
-Verify notifications for:
+Notifications can be generated for:
 
-- Task created
-- Task moved
-- Task reordered
-- Status updated
-- Priority changed
-- Due date changed
-- Task assigned/reassigned
-- Task updated
-- Task deleted
-- New comment
+🆕 Task creation
+↔️ Task movement
+↕️ Task reordering
+📌 Status updates
+🔥 Priority changes
+📅 Due-date changes
+👤 Assignment changes
+✏️ Task updates
+🗑️ Task deletion
+💬 New comments
+
+Notification actions:
+
+Mark as read
+Mark all as read
+Delete
+View notification list
 
 Notifications are stored in MongoDB.
 
-### I. Comments
+💬 Comments
 
-Open a task.
+Each task can contain persistent comments.
 
-Add a comment.
+Task
+ │
+ ├── Comment 1
+ ├── Comment 2
+ ├── Comment 3
+ └── ...
 
-Refresh.
+Users can:
 
-The comment should still exist.
+Add comments
+View comments
+Delete comments
+Refresh without losing data
+📊 Analytics
 
-Delete the comment and refresh again.
+The analytics dashboard provides project-level insights such as:
 
-### J. Analytics
+Total tasks
+Completed tasks
+In-progress tasks
+High-priority tasks
+Task distribution
+Status breakdown
+Productivity metrics
 
-Open Analytics and confirm the charts reflect the current MySQL task data.
+Analytics are calculated from persisted task data.
 
-### K. Light/dark mode
+🔎 Search & Filters
 
-Toggle the theme.
+The board supports task discovery through:
 
-Refresh.
+🔍 Search
+📌 Status filter
+🔥 Priority filter
+👤 Assignee filter
+Sprint selection
+🌗 Theme System
 
-Confirm the application remains usable in both modes.
+TaskGenZ supports:
 
----
+☀️ Light Mode
+      ↕
+🌙 Dark Mode
 
-# 4. Verify MySQL
+The theme is applied across:
+
+Login
+Dashboard
+Board
+Analytics
+Modals
+Drawers
+Notifications
+Forms
+Cards
+📱 Responsive UI
+
+The interface is designed for:
+
+🖥️ Desktop
+💻 Laptop
+📱 Mobile
+📟 Tablet
+
+The application adapts layouts, navigation and task-management components to different screen sizes.
+
+📁 Project Structure
+TaskGenZ/
+│
+├── backend/
+│   ├── src/
+│   │   └── main/
+│   │       ├── java/com/sprintdesk/
+│   │       │   ├── config/
+│   │       │   ├── controller/
+│   │       │   ├── dto/
+│   │       │   ├── entity/
+│   │       │   ├── repository/
+│   │       │   ├── security/
+│   │       │   └── service/
+│   │       │
+│   │       └── resources/
+│   │           ├── application.yml
+│   │           └── application-prod.yml
+│   │
+│   ├── Dockerfile
+│   ├── Dockerfile.vercel
+│   └── pom.xml
+│
+├── public/
+│
+├── src/
+│   ├── api/
+│   ├── assets/
+│   ├── components/
+│   │   ├── board/
+│   │   ├── layout/
+│   │   ├── notification/
+│   │   ├── task/
+│   │   └── ui/
+│   │
+│   ├── hooks/
+│   ├── pages/
+│   ├── routes/
+│   ├── store/
+│   ├── types/
+│   └── __tests__/
+│
+├── .env.example
+├── package.json
+├── vite.config.ts
+├── vercel.json
+└── README.md
+
+The Java package currently remains com.sprintdesk internally to preserve the existing backend architecture. The public product branding is TaskGenZ.
+
+🔌 REST API
+
+Base API:
+
+/api
+Health
+GET /api/health
+Authentication
+POST /api/auth/login
+POST /api/auth/refresh
+GET  /api/auth/me
+Tasks
+GET    /api/tasks
+POST   /api/tasks
+PUT    /api/tasks/{id}
+PATCH  /api/tasks/{id}/move
+DELETE /api/tasks/{id}
+Comments
+GET    /api/comments
+POST   /api/comments
+DELETE /api/comments/{id}
+Notifications
+GET    /api/notifications
+PATCH  /api/notifications/{id}/read
+PATCH  /api/notifications/read-all
+DELETE /api/notifications/{id}
+Reference Data
+GET /api/users
+GET /api/sprints
+🧪 Local Development
+Requirements
+
+Install:
+
+Java 21
+Maven 3.9+
+Node.js 22+
+npm
+MySQL 8+/9+
+MongoDB 8+
+Git
+
+You can use your existing local MySQL and MongoDB installations.
+
+1️⃣ Start MySQL
+
+If MySQL is already running, skip this step.
+
+brew services start mysql
+
+Create the database:
+
+mysql -u YOUR_MYSQL_USER -p \
+-e "CREATE DATABASE IF NOT EXISTS taskgenz;"
+2️⃣ Start MongoDB
+
+If MongoDB is already running, skip this step.
+
+brew services start mongodb-community
+
+Verify:
+
+mongosh --eval 'db.runCommand({ ping: 1 })'
+3️⃣ Start Spring Boot
+
+Open a terminal:
+
+cd /Users/ashutoshdubey/Downloads/Taskgenz/backend
+
+Set local environment variables:
+
+export MYSQL_URL='jdbc:mysql://127.0.0.1:3306/taskgenz?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC'
+
+export MYSQL_USERNAME='YOUR_MYSQL_USER'
+
+export MYSQL_PASSWORD='YOUR_MYSQL_PASSWORD'
+
+export MONGODB_URI='mongodb://127.0.0.1:27017/taskgenz'
+
+export JWT_SECRET='local-taskgenz-secret-change-this'
+
+export CORS_ALLOWED_ORIGINS='http://localhost:5173'
+
+export PORT=8080
+
+Start Spring Boot:
+
+mvn clean spring-boot:run
+
+Verify:
+
+curl -i http://localhost:8080/api/health
+
+Expected response:
+
+{
+  "service": "taskgenz-api",
+  "status": "UP"
+}
+4️⃣ Start Frontend
+
+Open another terminal:
+
+cd /Users/ashutoshdubey/Downloads/Taskgenz
+
+Install dependencies:
+
+npm install
+
+Start development server:
+
+npm run dev
+
+Open:
+
+http://localhost:5173
+
+The Vite development proxy forwards:
+
+/api/*
+    ↓
+http://localhost:8080
+🔑 Development Login
+
+The development seed supports:
+
+admin / admin123
+ashutosh / ashutosh123
+
+If your existing database already contains users, use the credentials currently stored in your database.
+
+Never publish real production credentials in this README.
+
+🧪 Full Testing Checklist
+Authentication
+ Open /login
+ Login
+ Dashboard opens
+ Logout
+ Login again
+Board
+ Tasks load from MySQL
+ Refresh preserves tasks
+ Status changes persist
+ Drag/drop works
+ Reordering persists
+Task Management
+ Create task
+ Edit task
+ Delete task
+ Change priority
+ Change assignee
+ Change due date
+ Change status
+Notifications
+ Task created
+ Task moved
+ Task reordered
+ Status updated
+ Priority changed
+ Due date changed
+ Assignment changed
+ Task updated
+ Task deleted
+ Comment created
+Comments
+ Add comment
+ Refresh
+ Comment remains
+ Delete comment
+ Refresh
+Analytics
+ Dashboard metrics load
+ Charts load
+ Task counts reflect database data
+Theme
+ Light mode
+ Dark mode
+ Refresh
+ Both modes remain usable
+🗄️ Verify MySQL
+
+Connect:
+
+mysql -u YOUR_MYSQL_USER -p taskgenz
 
 Run:
 
-```bash
-mysql -u YOUR_MYSQL_USER -p sprintdesk
-```
-
-Then:
-
-```sql
-SELECT id, title, status, priority, assignee_id, due_date, task_order
+SELECT
+    id,
+    title,
+    status,
+    priority,
+    assignee_id,
+    due_date,
+    task_order
 FROM tasks
 ORDER BY status, task_order;
-```
 
-You should see the task changes made through the UI.
+You should see task changes generated through the application.
 
----
+🍃 Verify MongoDB
 
-# 5. Verify MongoDB
+Open:
 
-Run:
-
-```bash
 mongosh
-```
 
 Then:
 
-```javascript
-use sprintdesk
+use taskgenz
+
 show collections
-db.notifications.find().sort({createdAt:-1}).limit(10)
-db.comments.find().sort({createdAt:-1}).limit(10)
-```
 
-You should see the notifications/comments generated by the UI.
+db.notifications
+  .find()
+  .sort({createdAt:-1})
+  .limit(10)
 
----
+db.comments
+  .find()
+  .sort({createdAt:-1})
+  .limit(10)
 
-# 6. Production build test
+You should see notifications and comments generated by the application.
 
-Frontend:
-
-```bash
-npm run lint
-npm run test
-npm run build
-```
-
-Backend:
-
-```bash
-cd backend
-mvn clean package
-```
-
-Both must finish successfully before pushing to GitHub.
-
----
-
-# 7. GitHub
+🏗️ Production Build
+Frontend
 
 From the project root:
 
-```bash
-git init
-git branch -M main
-git add .
-git status
-git commit -m "feat: production TaskForge full stack"
-```
+npm run lint
+npm run test
+npm run build
+Backend
+cd backend
+mvn clean package
 
-Create your GitHub repository, then:
+Both should complete successfully before production deployment.
 
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-git push -u origin main
-```
+☁️ Production Architecture
 
-Before pushing, make sure:
+Localhost databases cannot be accessed by a public deployment.
 
-```bash
-git status
-```
+Production architecture:
 
-does not show `.env`, passwords, JWT secrets, `node_modules`, or `backend/target`.
+                    🌍 USERS
+                       │
+                       ▼
+                ┌─────────────┐
+                │   Vercel    │
+                │ React/Vite  │
+                └──────┬──────┘
+                       │
+                     HTTPS
+                       │
+                       ▼
+                ┌─────────────┐
+                │ Spring Boot │
+                │ REST API    │
+                └──────┬──────┘
+                       │
+              ┌────────┴────────┐
+              │                 │
+              ▼                 ▼
+       ┌────────────┐    ┌────────────┐
+       │   MySQL    │    │  MongoDB   │
+       │            │    │            │
+       │ Users      │    │ Comments   │
+       │ Sprints    │    │ Notifications
+       │ Tasks      │    │            │
+       └────────────┘    └────────────┘
 
----
+The application layer is stateless.
 
-# 8. Production databases
+Database state remains outside the application container.
 
-Your Mac's `localhost` databases cannot be used by a public Vercel deployment.
+🔐 Production Environment Variables
 
-Create:
+Never commit production secrets.
 
-- a managed MySQL database
-- a MongoDB Atlas (or another managed MongoDB) database
+Backend environment variables:
 
-Use TLS/SSL database connections where your provider requires them.
+SPRING_PROFILES_ACTIVE=prod
 
-Create the production database/schema:
-
-```text
-sprintdesk
-```
-
-The application creates/updates the tables with Hibernate `ddl-auto=update`.
-
----
-
-# 9. Vercel deployment
-
-This repository contains:
-
-```text
-vercel.json
-backend/Dockerfile.vercel
-```
-
-Vercel Services can deploy multiple services in one Vercel project, and Vercel's container support can run HTTP Docker containers such as a Spring Boot API. Persistent database state must remain in external databases.
-
-Import the GitHub repository into Vercel.
-
-Add these **Production** environment variables:
-
-```text
-SPRING_PROFILES_ACTIVE=default
 MYSQL_URL=YOUR_MANAGED_MYSQL_JDBC_URL
 MYSQL_USERNAME=YOUR_MANAGED_MYSQL_USER
 MYSQL_PASSWORD=YOUR_MANAGED_MYSQL_PASSWORD
-MONGODB_URI=YOUR_MONGODB_ATLAS_URI
+
+MONGODB_URI=YOUR_MONGODB_URI
+
 JWT_SECRET=YOUR_LONG_RANDOM_SECRET
-CORS_ALLOWED_ORIGINS=https://YOUR-PROJECT.vercel.app
+
+CORS_ALLOWED_ORIGINS=https://YOUR-PRODUCTION-DOMAIN
+
 PORT=8080
-```
+Never commit
+.env
+MYSQL_PASSWORD
+MONGODB_URI
+JWT_SECRET
+access tokens
+refresh tokens
 
-Do not use `VITE_` for backend secrets.
+Only commit:
 
-Deploy.
+.env.example
+🚀 Deployment Flow
+       GitHub
+          │
+          ▼
+     ┌─────────┐
+     │ Vercel  │
+     └────┬────┘
+          │
+          ▼
+   React Frontend
+          │
+        HTTPS
+          │
+          ▼
+   Spring Boot API
+          │
+       ┌──┴──┐
+       ▼     ▼
+     MySQL MongoDB
+Deployment Order
+Create production MySQL
+Create production MongoDB
+Configure backend environment variables
+Deploy Spring Boot API
+Verify /api/health
+Configure frontend API URL
+Deploy React application
+Configure CORS
+Test authentication
+Test CRUD
+Test drag/drop
+Test notifications
+Test comments
+Test analytics
+🔍 Production Verification
 
----
+After deployment verify:
 
-# 10. Production verification
+/
+ /login
+ /dashboard
+ /board
+ /analytics
+ /api/health
 
-After Vercel gives you the public domain:
+Then test the complete CRUD workflow from another browser or device.
 
-```text
-https://YOUR-PROJECT.vercel.app
-```
+Because application data is stored in production databases, users are not dependent on your Mac or local localhost services.
 
-Test:
+🛡️ Security Principles
 
-```text
-https://YOUR-PROJECT.vercel.app/
-https://YOUR-PROJECT.vercel.app/login
-https://YOUR-PROJECT.vercel.app/dashboard
-https://YOUR-PROJECT.vercel.app/board
-https://YOUR-PROJECT.vercel.app/analytics
-https://YOUR-PROJECT.vercel.app/api/health
-```
+TaskGenZ follows these deployment rules:
 
-Then perform the same CRUD/drag/notification checklist from the local test.
+🔐 Secrets
+    ↓
+Environment Variables
 
-Open the application from another browser/device. The same task data should be visible because it is stored in the managed databases rather than in the browser.
+🗄️ Database Credentials
+    ↓
+Never commit to Git
 
----
+🎫 JWT Secret
+    ↓
+Production environment only
 
-# Security rules
+🌍 API
+    ↓
+HTTPS
 
-Never commit:
+🛢️ Database
+    ↓
+Managed / secured connection
+📌 Development Workflow
+1. Develop locally
+       ↓
+2. Run tests
+       ↓
+3. Build frontend
+       ↓
+4. Build backend
+       ↓
+5. Review git diff
+       ↓
+6. Commit
+       ↓
+7. Push to GitHub
+       ↓
+8. Deploy
+       ↓
+9. Verify production
 
-- MySQL password
-- MongoDB connection string
-- JWT secret
-- `.env`
-- access/refresh tokens
+Useful commands:
 
-Only commit `.env.example`.
+git status
 
----
+git diff
 
-# Important deployment note
+git add .
 
-Vercel's current container/service model is designed for HTTP application services. It does not provide persistent database volumes for your application container. That is why this project keeps MySQL and MongoDB outside the Vercel container.
+git commit -m "feat: update TaskGenZ"
 
-For the final public deployment:
+git push origin main
+📈 Project Goals
 
-```text
-GitHub
-   ↓
-Vercel
-   ├── TaskForge React frontend
-   └── Spring Boot API container
-          ↓
-       Managed MySQL
-          +
-       Managed MongoDB
-```
+TaskGenZ is being developed as a practical Java Full Stack project demonstrating:
+
+Frontend engineering
+Backend engineering
+REST API development
+JWT security
+SQL database design
+NoSQL database usage
+State management
+API integration
+Optimistic UI
+Drag & drop interaction
+Testing
+Docker/container deployment
+Cloud deployment
+Production environment configuration
+🗺️ Future Improvements
+
+Potential future improvements include:
+
+Team collaboration
+Role-based access control
+Advanced project management
+File attachments
+Activity timeline
+Advanced reporting
+Email notifications
+Calendar integration
+More granular permissions
+Automated CI/CD pipelines
+🧑‍💻 Author
+<div align="center">
+Ashutosh Dubey
+
+Java Full Stack Developer • MCA Student • Software Developer
+
+<br/> <a href="https://github.com/ashudubeyvns"> <img src="https://img.shields.io/badge/GitHub-ashudubeyvns-181717?style=for-the-badge&logo=github" /> </a> <a href="https://www.linkedin.com/in/ashutoshdubey0908/"> <img src="https://img.shields.io/badge/LinkedIn-Ashutosh%20Dubey-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /> </a> </div>
+<div align="center">
+⚡ TaskGenZ
+
+Plan. Build. Track. Deliver.
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=100&section=footer" width="100%"/> </div> ```
