@@ -67,7 +67,7 @@ public class SecurityConfig {
 
     @Bean
 CorsConfigurationSource corsConfigurationSource(
-        @Value("${app.cors.allowed-origins}") String origins
+        @Value("${CORS_ALLOWED_ORIGINS:http://localhost:5173}") String origins
 ) {
     CorsConfiguration config = new CorsConfiguration();
 
